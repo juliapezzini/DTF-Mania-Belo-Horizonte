@@ -3,85 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DTF Mania | Belo Horizonte</title>
+    <title>DTF Mania</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --cinza-destaque: #333333; --cinza-medio: #666666; --cinza-claro: #999999;
-            --preto: #000000; --bg: #C4C4C4; --card: #E0E0E0; --white: #ffffff;
-            --whatsapp-color: #25D366; --alerta-cor: #b91c1c;
+            --preto-topo: #0e0808;
+            --cinza-bg: #C4C4C4;
+            --cinza-escuro: #333333; 
+            --white: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body { background-color: var(--bg); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--cinza-bg); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        header {
-            background: #0e0808; padding: 0 5%; display: flex; justify-content: space-between;
-            align-items: center; position: sticky; top: 0; z-index: 2000; height: 80px;
-        }
+        header { background: var(--preto-topo); padding: 0 5%; display: flex; justify-content: space-between; align-items: center; height: 80px; position: sticky; top: 0; z-index: 2000; }
         .logo img { height: 45px; }
-        .search-box { width: 35%; }
-        .search-box input { 
-            width: 100%; padding: 12px 20px; border-radius: 30px; 
-            border: none; background: #1a1a1a; color: white; font-size: 14px;
-        }
-
-        .header-icons { display: flex; gap: 25px; color: white; font-size: 22px; }
-        .badge { 
-            position: absolute; top: -8px; right: -12px; background: var(--white); 
-            color: black; font-size: 11px; padding: 2px 7px; border-radius: 50%; font-weight: 900; 
-        }
-
-        nav { background: #2C2A28; display: flex; justify-content: center; overflow-x: auto; scrollbar-width: none; border-bottom: 2px solid var(--cinza-medio); }
-        nav::-webkit-scrollbar { display: none; }
-        nav a { color: white; text-decoration: none; padding: 20px 25px; font-size: 14px; font-weight: 800; text-transform: uppercase; white-space: nowrap; transition: 0.3s; cursor: pointer; }
-
-        .hero { width: 100%; padding: 20px 5%; max-width: 1600px; margin: 0 auto; }
+        .header-icons { display: flex; gap: 20px; color: white; font-size: 22px; }
+        .header-icons i { cursor: pointer; position: relative; }
+        .badge { position: absolute; top: -8px; right: -12px; background: var(--cinza-escuro); color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%; font-weight: 900; }
+        
+        .hero { width: 100%; padding: 20px 5% 0 5%; }
         .hero-banner { width: 100%; aspect-ratio: 2000 / 850; border-radius: 25px; overflow: hidden; position: relative; background: #000; }
-        .hero-banner img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; }
-        .hero-banner img.active { opacity: 0.85; }
+        .hero-banner img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; }
+        .hero-banner img.active { opacity: 1; }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 5%; }
-        
-        .home-notice { 
-            background: #fdf2f2; border: 3px solid #ffcfcf; padding: 20px; 
-            border-radius: 15px; margin-bottom: 35px; color: var(--alerta-cor); 
-            font-size: 18px; font-weight: 700; line-height: 1.6; 
+        /* ESTILO DO RECADO IMPORTANTE */
+        .home-notice {
+            background: #fff;
+            margin: 20px 5%;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 6px solid var(--preto-topo);
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        .home-notice b { color: #d32f2f; }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
-        .product-card { background: var(--card); border-radius: 12px; padding: 15px; display: flex; flex-direction: column; }
-        .img-holder { width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; margin-bottom: 15px; background: white; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; padding: 0 5%; margin-bottom: 40px; }
+        .product-card { background: #E0E0E0; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .product-card:active { transform: scale(0.98); }
+        .img-holder { width: 100%; aspect-ratio: 1; border-radius: 10px; overflow: hidden; margin-bottom: 12px; background: white; }
         .img-holder img { width: 100%; height: 100%; object-fit: cover; }
-        .product-name { font-weight: 700; margin-bottom: 8px; font-size: 15px; color: #111; }
-        .product-price { font-weight: 800; color: #000; margin-bottom: 15px; font-size: 18px; }
-        .btn-order { background: var(--cinza-destaque); color: var(--white); padding: 15px; border-radius: 8px; border: none; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; }
+        .btn-main { background: var(--cinza-escuro); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: auto; font-size: 12px; }
 
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 3000; display: none; }
-        .side-panel { position: fixed; top: 0; right: -100%; width: 100%; max-width: 480px; height: 100%; background: white; z-index: 3001; transition: 0.4s ease; padding: 30px; display: flex; flex-direction: column; }
+        /* Painéis e Overlays */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; display: none; }
+        .side-panel { position: fixed; top: 0; right: -100%; width: 450px; height: 100%; background: #fff; z-index: 3001; transition: 0.4s ease; display: flex; flex-direction: column; }
         .side-panel.active { right: 0; }
+        .panel-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .panel-body { flex: 1; overflow-y: auto; padding: 20px; }
+        .panel-footer { padding: 20px; border-top: 1px solid #eee; }
 
-        .modal-img-container { width: 100%; aspect-ratio: 1; background: white; border-radius: 12px; overflow: hidden; margin-bottom: 25px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center;}
-        .modal-img-container img { width: 95%; height: 95%; object-fit: contain; }
+        .list-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
+        .list-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover; }
+        .valor-integral-destaque { font-size: 26px; font-weight: 900; color: #000; display: block; }
 
-        .panel-item { display: flex; gap: 20px; padding: 15px 0; border-bottom: 1px solid #eee; align-items: center; }
-        .panel-item img { width: 100px; height: 100px; object-fit: contain; border-radius: 8px; border: 1px solid #ddd; }
-        .panel-item-info b { font-size: 16px; display: block; margin-bottom: 5px; }
-        .panel-item-info span { font-size: 18px; font-weight: 800; }
+        .qty-box { display: flex; align-items: center; justify-content: center; gap: 30px; margin: 25px 0; }
+        .qty-btn { background: var(--cinza-escuro); color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 20px; }
+        #prodQty { width: 50px; text-align: center; border: none; font-size: 24px; font-weight: 900; background: transparent; }
+        .detail-img-huge { width: 100%; height: 320px; object-fit: contain; border-radius: 15px; margin-bottom: 15px; background: #f9f9f9; }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .menu-card { background: #f4f4f4; border-radius: 15px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: #333; text-decoration: none; }
+        .menu-card i { font-size: 24px; margin-bottom: 8px; }
+
+        @media (max-width: 768px) { .side-panel { width: 100%; } .product-grid { grid-template-columns: 1fr 1fr; } }
         
-        .btn-whatsapp { background-color: var(--whatsapp-color); color: white; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px; border-radius: 8px; font-weight: 800; border: none; width: 100%; cursor: pointer; text-decoration: none; margin-top: 10px; }
-        .btn-cinza { background-color: #666; color: white; padding: 15px; border-radius: 8px; border: none; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-
-        footer { background: #0e0808; color: #ffffff; padding: 40px 5%; margin-top: 40px; }
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
-        footer p, footer strong { color: #ffffff !important; }
-
-        @media (max-width: 768px) {
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .side-panel { max-width: 90%; }
-        }
+        footer { background: var(--preto-topo); color: white; padding: 60px 5% 40px; text-align: center; margin-top: 50px; }
+        .footer-logo { height: 60px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -89,9 +82,9 @@
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
 <header>
-    <div class="logo"><img src="logo.png" alt="DTF Mania"></div>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="O que você procura?" onkeyup="searchProduct()">
+    <div style="display:flex; align-items:center; gap:20px;">
+        <i class="fas fa-bars" onclick="openPanel('menu')" style="color:white; font-size:24px; cursor:pointer;"></i>
+        <div class="logo"><img src="logo.png" alt="DTF Mania"></div>
     </div>
     <div class="header-icons">
         <i class="far fa-heart" onclick="openPanel('favs')"><span class="badge" id="favCount">0</span></i>
@@ -99,208 +92,246 @@
     </div>
 </header>
 
-<nav>
-    <a onclick="filterCategory('todos')">Destaques</a>
-    <a onclick="filterCategory('canecas')">Canecas</a>
-</nav>
+<main>
+    <section class="hero">
+        <div class="hero-banner" id="banner">
+            <img src="banner1.png" class="active">
+            <img src="banner2.png">
+        </div>
+    </section>
 
-<section class="hero">
-    <div class="hero-banner" id="banner">
-        <img src="banner1.png" class="active">
-        <img src="banner2.png">
-    </div>
-</section>
-
-<main class="container">
     <div class="home-notice">
-        <b>IMPORTANTE:</b> Todos os nossos pedidos são finalizados e direcionados para o <b>WhatsApp</b> para garantir o melhor atendimento.<br><br>
-        • RETIRADA: Av. Amazonas, 1502, Loja 02 - Barro Preto, BH.<br>
-        • PAGAMENTO: 50% de sinal no pedido e 50% na retirada.
+        <b>IMPORTANTE:</b> Pedidos finalizados via <b>WhatsApp</b>.<br>
+        • RETIRADA: Av. Amazonas, 1502, Loja 02 - Barro Preto, BH.
     </div>
-    <div class="product-grid" id="productGrid"></div>
+
+    <div class="product-grid" id="productGrid"></div> 
 </main>
 
 <div class="side-panel" id="sidePanel">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-        <h2 id="panelTitle" style="font-family:'Archivo Black'; font-size: 18px;">SACOLA</h2>
-        <i class="fas fa-times" onclick="closeAll()" style="cursor:pointer; font-size: 20px;"></i>
+    <div class="panel-header">
+        <h2 id="panelTitle" style="font-family:'Archivo Black'; font-size:14px; text-transform:uppercase;"></h2>
+        <i class="fas fa-times" onclick="closeAll()" style="cursor:pointer; font-size:22px;"></i>
     </div>
-    <div id="panelContent" style="flex:1; overflow-y:auto;"></div>
-    <div id="panelFooter"></div>
-</div>
-
-<div class="side-panel" id="productModal">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-        <h2 style="font-family:'Archivo Black'; font-size: 18px;">DETALHES DO PRODUTO</h2>
-        <i class="fas fa-times" onclick="closeAll()" style="cursor:pointer; font-size: 20px;"></i>
-    </div>
-    <div id="productDetails" style="flex:1; overflow-y:auto;"></div>
+    <div class="panel-body" id="panelBody"></div>
+    <div class="panel-footer" id="panelFooter"></div>
 </div>
 
 <footer>
-    <div class="footer-grid">
-        <div>
-            <img src="logo.png" alt="DTF Mania" style="height:35px; margin-bottom: 10px;">
-            <p>Especialistas em DTF e personalização premium em Belo Horizonte.</p>
-        </div>
-        <div>
-            <strong style="font-size: 18px; font-family: 'Archivo Black';">CONTATO</strong>
-            <p style="margin-top:10px;"><i class="fab fa-whatsapp"></i> +55 31 98103-2274</p>
-            <p><i class="fas fa-map-marker-alt"></i> Barro Preto - BH/MG</p>
-        </div>
-    </div>
+    <img src="logo.png" alt="DTF Mania" class="footer-logo">
+    <p style="font-size: 11px; opacity: 0.6; letter-spacing: 2px; font-weight: 800;">DTF MANIA © 2026</p>
 </footer>
 
 <script>
-    const lojaTelefone = "5531981032274";
-    const precoUnico = 29.99;
-    
-const produtos = [
-  { id: 1, cat: 'canecas', nome: "M05 - Única", preco: precoUnico, img: "mockup-1.jpg" },
-  { id: 2, cat: 'canecas', nome: "M06 - Borboletas", preco: precoUnico, img: "mockup.jpg" },
-  { id: 3, cat: 'canecas', nome: "M21 - Cacto", preco: precoUnico, img: "mockup-4.jpg" },
-  { id: 4, cat: 'canecas', nome: "M33 - Coração Lhama", preco: precoUnico, img: "mockup-7.jpg" },
-  { id: 5, cat: 'canecas', nome: "M39 - Zumbi", preco: precoUnico, img: "mockup-5.jpg" },
-  { id: 6, cat: 'canecas', nome: "M40 - Alienígena", preco: precoUnico, img: "mockup-6.jpg" },
-  { id: 7, cat: 'canecas', nome: "M18 - Coração Vermelho", preco: precoUnico, img: "mockup-8.jpg" },
-  { id: 8, cat: 'canecas', nome: "M17 - Coração Colorido", preco: precoUnico, img: "mockup-2.jpg" }
-];
+    const PRODUTOS = [
+        { nome: "Notificação Favorita", preco: 29.99, img: "1/c (2).jpg" },
+        { nome: "Oi Amor", preco: 29.99, img: "1/c (3).jpg" },
+        { nome: "Te Amo Mãe", preco: 29.99, img: "1/c (16).jpg" },
+        { nome: "Além da Vida", preco: 29.99, img: "1/c (29).jpg" },
+        { nome: "Melhor Mãe do Mundo", preco: 29.99, img: "1/c (5).jpg" },
+        { nome: "Dia das Mulheres", preco: 29.99, img: "1/c (45).jpg" },
+        { nome: "Promovida a Dinda", preco: 29.99, img: "1/c (51).jpg" },
+        { nome: "Amigas, Irmãs, Parceiras", preco: 29.99, img: "1/c (42).jpg" },
+        { nome: "Levante e seja feliz", preco: 29.99, img: "1/c (6).jpg" },
+        { nome: "Você é mais forte", preco: 29.99, img: "1/c (7).jpg" },
+        { nome: "Caneca da Prof", preco: 29.99, img: "1/c (19).jpg" },
+        { nome: "Você Faz Meu Coração Feliz", preco: 29.99, img: "1/c (8).jpg" },
+        { nome: "Caneca do Prof", preco: 29.99, img: "1/c (22).jpg" },
+        { nome: "Lágrimas dos Alunos", preco: 29.99, img: "1/c (25).jpg" },
+        { nome: "Melhor Professora", preco: 29.99, img: "1/c (26).jpg" },
+        { nome: "Melhor Professor", preco: 29.99, img: "1/c (28).jpg" },
+        { nome: "Feliz Dia dos Pais", preco: 29.99, img: "1/c (23).jpg" },
+        { nome: "Querido Pai", preco: 29.99, img: "1/c (27).jpg" },
+        { nome: "Borboletas", preco: 29.99, img: "1/c (52).jpg" },
+        { nome: "Maria Bonita", preco: 29.99, img: "1/c (40).jpg" },
+        { nome: "Promovido a Vovô", preco: 29.99, img: "1/c (21).jpg" },
+        { nome: "Simba", preco: 29.99, img: "1/c (13).jpg" },
+        { nome: "Panda", preco: 29.99, img: "1/c (14).jpg" },
+        { nome: "Dia dos Avôs", preco: 29.99, img: "1/c (18).jpg" },
+        { nome: "Promovida a Vovó", preco: 29.99, img: "1/c (24).jpg" },
+        { nome: "Gratidão", preco: 29.99, img: "1/c (38).jpg" },
+        { nome: "Amor é uma Escolha", preco: 29.99, img: "1/c (46).jpg" },
+        { nome: "Frase de Mãe", preco: 29.99, img: "1/c (49).jpg" },
+        { nome: "Mulherão", preco: 29.99, img: "1/c (41).jpg" },
+        { nome: "Girafa", preco: 29.99, img: "1/c (10).jpg" },
+        { nome: "Super Mario", preco: 29.99, img: "1/c (11).jpg" },
+        { nome: "Marvel", preco: 29.99, img: "1/c (12).jpg" },
+        { nome: "Pai Significado", preco: 29.99, img: "1/c (30).jpg" },
+        { nome: "Sapo Alegre", preco: 29.99, img: "1/c (31).jpg" },
+        { nome: "Eu Amo Leitura", preco: 29.99, img: "1/c (32).jpg" },
+        { nome: "Não Nos Falte Fé", preco: 29.99, img: "1/c (33).jpg" },
+        { nome: "Star Wars", preco: 29.99, img: "1/c (34).jpg" },
+        { nome: "Stranger Things", preco: 29.99, img: "1/c (35).jpg" },
+        { nome: "Sapo Cururu", preco: 29.99, img: "1/c (36).jpg" },
+        { nome: "Plantei Uma Amiga", preco: 29.99, img: "1/c (43).jpg" },
+        { nome: "Yeshua", preco: 29.99, img: "1/c (44).jpg" },
+        { nome: "Te Amo Vida", preco: 29.99, img: "1/c (47).jpg" }
+    ];
 
-    let cart = []; 
-    let favs = [];
+    let cart = JSON.parse(localStorage.getItem('dtf_cart')) || [];
+    let favs = JSON.parse(localStorage.getItem('dtf_favs')) || [];
 
-    function formatMoney(val) { return val.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}); }
+    function save() {
+        localStorage.setItem('dtf_cart', JSON.stringify(cart));
+        localStorage.setItem('dtf_favs', JSON.stringify(favs));
+        updateBadges();
+    }
 
-    function render(lista) {
-        const grid = document.getElementById('productGrid');
-        grid.innerHTML = lista.map(p => `
+    function renderProducts() {
+        document.getElementById('productGrid').innerHTML = PRODUTOS.map(p => `
             <div class="product-card">
                 <div class="img-holder"><img src="${p.img}"></div>
-                <p class="product-name">${p.nome}</p>
-                <p class="product-price">${formatMoney(p.preco)}</p>
-                <button class="btn-order" onclick="showProduct(${p.id})">VER PRODUTO</button>
+                <p style="font-weight:700; font-size:12px; margin-bottom:4px;">${p.nome}</p>
+                <p style="font-weight:800; font-size:15px; margin-bottom:10px;">R$ ${p.preco.toFixed(2)}</p>
+                <button class="btn-main" onclick="openDetails('${p.nome}', ${p.preco}, '${p.img}')">VER DETALHES</button>
             </div>
         `).join('');
     }
 
-    function searchProduct() {
-        const termo = document.getElementById('searchInput').value.toLowerCase();
-        render(produtos.filter(p => p.nome.toLowerCase().includes(termo)));
-    }
-
-    function filterCategory(cat) {
-        render(cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat));
-    }
-
-    function showProduct(id) {
-        const p = produtos.find(x => x.id === id);
-        document.getElementById('productDetails').innerHTML = `
-            <div class="modal-img-container"><img src="${p.img}"></div>
-            <h2 style="font-weight:800; font-size:24px; margin-bottom:5px;">${p.nome}</h2>
-            <h3 style="font-size:26px; color:black; margin-bottom:25px;">${formatMoney(p.preco)}</h3>
-            <div style="display:flex; align-items:center; justify-content:space-between; background:#f4f4f4; border-radius:8px; padding:10px; margin-bottom:25px;">
-                <button onclick="changeQty(-1)" style="width:45px; height:45px; background:white; border:1px solid #ddd; font-weight:bold; cursor:pointer;">-</button>
-                <input type="text" id="qtyValue" value="1" readonly style="width:60px; text-align:center; border:none; background:transparent; font-weight:800; font-size:22px;">
-                <button onclick="changeQty(1)" style="width:45px; height:45px; background:white; border:1px solid #ddd; font-weight:bold; cursor:pointer;">+</button>
-            </div>
-            <button class="btn-order" style="background:black; height:60px;" onclick="addToCart(${p.id})">ADICIONAR À SACOLA</button>
-            <button class="btn-cinza" onclick="addToFavs(${p.id})">FAVORITAR</button>
-        `;
-        openPanel('product');
-    }
-
     function openPanel(type) {
-        document.getElementById('overlay').style.display = 'block';
-        if(type === 'product') return document.getElementById('productModal').classList.add('active');
-        const isCart = type === 'cart';
-        const list = isCart ? cart : favs;
-        let total = 0;
-        document.getElementById('panelTitle').innerText = isCart ? 'MINHA SACOLA' : 'MEUS FAVORITOS';
+        const body = document.getElementById('panelBody');
+        const footer = document.getElementById('panelFooter');
+        footer.style.display = 'none';
         
-        document.getElementById('panelContent').innerHTML = list.map((item, index) => {
-            const p = produtos.find(x => x.id === item.id);
-            total += (p.preco * item.qty);
-            return `<div class="panel-item">
-                        <img src="${p.img}">
-                        <div class="panel-item-info">
-                            <b>${p.nome}</b>
-                            <span>${item.qty}x ${formatMoney(p.preco)}</span>
-                        </div>
-                        <i class="fas fa-trash-alt" style="margin-left:auto; color:#ff4d4d; cursor:pointer;" onclick="removeItem('${type}', ${index})"></i>
-                    </div>`;
-        }).join('') || `<p style="text-align:center; padding-top:40px;">Vazio</p>`;
-        
-        let foot = '';
-        if(isCart && cart.length > 0) {
-            foot = `
-                <div style="background:#fff5f5; border:2px dashed #b91c1c; padding:15px; border-radius:8px; color:#b91c1c; font-size:13px; margin-bottom:15px; font-weight:700;">
-                    AVISO: O pedido será enviado ao WhatsApp para conferência e pagamento do sinal (50%).
+        if(type === 'menu') {
+            document.getElementById('panelTitle').innerText = "Menu";
+            body.innerHTML = `<div class="menu-grid">
+                <div class="menu-card" onclick="closeAll()"><i class="fas fa-home"></i><span>Loja</span></div>
+                <div class="menu-card" onclick="openPanel('cart')"><i class="fas fa-shopping-bag"></i><span>Sacola</span></div>
+                <div class="menu-card" onclick="openPanel('favs')"><i class="fas fa-heart"></i><span>Desejos</span></div>
+                <a href="https://wa.me/5531981032274" class="menu-card" style="text-decoration:none;"><i class="fab fa-whatsapp"></i><span>Suporte</span></a>
+            </div>`;
+        } else if(type === 'cart') {
+            document.getElementById('panelTitle').innerText = "Minha Sacola";
+            let total = cart.reduce((acc, i) => acc + (i.preco * i.qtd), 0);
+            let sinal = total * 0.5;
+
+            body.innerHTML = cart.length === 0 ? "Sua sacola está vazia." : cart.map((item, i) => `
+                <div class="list-item">
+                    <img src="${item.img}">
+                    <div style="flex:1"><b>${item.nome}</b><br><small>${item.qtd}x R$ ${item.preco.toFixed(2)}</small></div>
+                    <i class="fas fa-trash-alt" style="color:#ddd; cursor:pointer;" onclick="removeItem('cart', ${i})"></i>
                 </div>
-                <div style="padding:15px 0; border-top:2px solid #eee;">
-                    <b style="font-size:22px; display:block;">TOTAL: ${formatMoney(total)}</b>
-                    <b style="font-size:18px; color:#000; margin-top:5px; display:block;">SINAL 50%: ${formatMoney(total/2)}</b>
+            `).join('') + (cart.length > 0 ? `
+                <div style="background:#f9f9f9; padding:20px; border-radius:12px; margin-top:10px;">
+                    <span style="font-size:11px; color:#666; font-weight:800; text-transform:uppercase;">Valor Integral:</span>
+                    <span class="valor-integral-destaque">R$ ${total.toFixed(2)}</span>
+                    <hr style="margin:12px 0; border:0; border-top:1px solid #eee;">
+                    <span style="font-size:11px; color:#666; font-weight:800; text-transform:uppercase;">Sinal para Produção (50%):</span>
+                    <span style="display:block; font-size:20px; font-weight:800; color:#27ae60;">R$ ${sinal.toFixed(2)}</span>
+                </div>` : '');
+            if(cart.length > 0) {
+                footer.style.display = 'block';
+                footer.innerHTML = `<button class="btn-main" style="padding:16px; font-size:14px;" onclick="checkout()">FINALIZAR NO WHATSAPP</button>`;
+            }
+        } else if(type === 'favs') {
+            document.getElementById('panelTitle').innerText = "Meus Favoritos";
+            body.innerHTML = favs.length === 0 ? "Nenhum item salvo." : favs.map((item, i) => `
+                <div class="list-item">
+                    <img src="${item.img}">
+                    <div style="flex:1"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
+                    <i class="fas fa-trash-alt" style="color:#ddd; cursor:pointer;" onclick="removeItem('favs', ${i})"></i>
                 </div>
-                <button onclick="sendToWhatsapp()" class="btn-whatsapp">FINALIZAR NO WHATSAPP</button>`;
-        } else if(!isCart && favs.length > 0) {
-            foot = `<button onclick="moveAllToCart()" class="btn-cinza">MOVER TUDO PARA SACOLA</button>`;
+            `).join('');
+            if(favs.length > 0) {
+                footer.style.display = 'block';
+                footer.innerHTML = `<button class="btn-main" onclick="moveAllToCart()">MOVER TUDO PARA A SACOLA</button>`;
+            }
         }
-        document.getElementById('panelFooter').innerHTML = foot;
         document.getElementById('sidePanel').classList.add('active');
+        document.getElementById('overlay').style.display = 'block';
     }
 
-    function addToCart(id) {
-        const qty = parseInt(document.getElementById('qtyValue').value);
-        const index = cart.findIndex(i => i.id === id);
-        if(index > -1) cart[index].qty += qty; else cart.push({ id, qty });
-        updateBadges(); closeAll(); openPanel('cart');
+    function openDetails(nome, preco, img) {
+        const body = document.getElementById('panelBody');
+        const footer = document.getElementById('panelFooter');
+        document.getElementById('panelTitle').innerText = "Detalhes";
+        body.innerHTML = `
+            <img src="${img}" class="detail-img-huge">
+            <h3 style="text-align:center;">${nome}</h3>
+            <p style="text-align:center; font-size:32px; font-weight:900; margin:15px 0;">R$ ${preco.toFixed(2)}</p>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                <input type="number" id="prodQty" value="1" readonly>
+                <button class="qty-btn" onclick="updateQty(1)">+</button>
+            </div>`;
+        footer.style.display = 'block';
+        footer.innerHTML = `
+            <button class="btn-main" style="padding:15px; margin-bottom:10px" onclick="addToCart('${nome}', ${preco}, '${img}')">ADICIONAR AO CARRINHO</button>
+            <button class="btn-main" style="padding:15px;" onclick="addToFavs('${nome}', ${preco}, '${img}')">SALVAR NOS FAVORITOS</button>
+        `;
+        document.getElementById('sidePanel').classList.add('active');
+        document.getElementById('overlay').style.display = 'block';
     }
 
-    function addToFavs(id) {
-        const qty = parseInt(document.getElementById('qtyValue').value);
-        const index = favs.findIndex(i => i.id === id);
-        if(index > -1) favs[index].qty += qty; else favs.push({ id, qty });
-        updateBadges(); closeAll(); openPanel('favs');
+    function updateQty(val) {
+        let input = document.getElementById('prodQty');
+        let n = parseInt(input.value) + val;
+        if(n > 0) input.value = n;
+    }
+
+    function addToCart(nome, preco, img) {
+        let qtd = parseInt(document.getElementById('prodQty').value);
+        cart.push({nome, preco, img, qtd});
+        save();
+        openPanel('cart');
+    }
+
+    function addToFavs(nome, preco, img) {
+        if(!favs.find(f => f.nome === nome)) {
+            favs.push({nome, preco, img});
+            save();
+        }
+        openPanel('favs');
     }
 
     function moveAllToCart() {
-        favs.forEach(fItem => {
-            const cartIdx = cart.findIndex(cItem => cItem.id === fItem.id);
-            if(cartIdx > -1) cart[cartIdx].qty += fItem.qty; else cart.push({ ...fItem });
-        });
-        favs = []; updateBadges(); openPanel('cart');
+        favs.forEach(f => cart.push({...f, qtd: 1}));
+        favs = [];
+        save();
+        openPanel('cart');
     }
 
-    function removeItem(type, index) { 
-        if(type === 'cart') cart.splice(index, 1); else favs.splice(index, 1); 
-        updateBadges(); openPanel(type); 
+    function removeItem(type, index) {
+        if(type === 'cart') cart.splice(index, 1);
+        else favs.splice(index, 1);
+        save();
+        openPanel(type);
     }
 
-    function updateBadges() { 
-        document.getElementById('cartCount').innerText = cart.reduce((acc, curr) => acc + curr.qty, 0); 
-        document.getElementById('favCount').innerText = favs.reduce((acc, curr) => acc + curr.qty, 0); 
+    function updateBadges() {
+        document.getElementById('cartCount').innerText = cart.length;
+        document.getElementById('favCount').innerText = favs.length;
     }
 
-    function closeAll() { document.getElementById('overlay').style.display = 'none'; document.querySelectorAll('.side-panel').forEach(p => p.classList.remove('active')); }
-    function changeQty(amt) { let v = parseInt(document.getElementById('qtyValue').value) + amt; if(v < 1) v = 1; document.getElementById('qtyValue').value = v; }
-    
-    function sendToWhatsapp() {
-        let total = 0; let msg = `*NOVO PEDIDO DTF MANIA*\n\n`;
-        cart.forEach(i => { const p = produtos.find(x => x.id === i.id); total += p.preco * i.qty; msg += `• ${i.qty}x ${p.nome} (${formatMoney(p.preco*i.qty)})\n`; });
-        msg += `\n*TOTAL: ${formatMoney(total)}*\n*SINAL 50%: ${formatMoney(total/2)}*\n\n_Aguardo confirmação!_`;
-        window.open(`https://wa.me/${lojaTelefone}?text=${encodeURIComponent(msg)}`);
+    function closeAll() {
+        document.getElementById('sidePanel').classList.remove('active');
+        document.getElementById('overlay').style.display = 'none';
     }
 
-    window.onload = () => render(produtos);
+    function checkout() {
+        let total = cart.reduce((acc, i) => acc + (i.preco * i.qtd), 0);
+        let sinal = total * 0.5;
+        let msg = `PEDIDO DTF MANIA\n\n` + 
+                  cart.map(i => i.qtd + "x " + i.nome).join('\n') + 
+                  `\n\nVALOR INTEGRAL: R$ ` + total.toFixed(2) +
+                  `\nSINAL (50%): R$ ` + sinal.toFixed(2);
+        window.open(`https://wa.me/5531981032274?text=${encodeURIComponent(msg)}`);
+    }
 
-    let bIdx = 0;
+    // Controle do Banner
+    const imgs = document.querySelectorAll('#banner img');
+    let cur = 0;
     setInterval(() => {
-        const imgs = document.querySelectorAll('.hero-banner img');
-        if(!imgs.length) return;
-        imgs[bIdx].classList.remove('active');
-        bIdx = (bIdx + 1) % imgs.length;
-        imgs[bIdx].classList.add('active');
+        if(imgs.length > 0) {
+            imgs[cur].classList.remove('active');
+            cur = (cur + 1) % imgs.length;
+            imgs[cur].classList.add('active');
+        }
     }, 4000);
-</script>
 
+    renderProducts();
+    updateBadges();
+</script>
 </body>
 </html>
